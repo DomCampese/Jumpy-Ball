@@ -127,6 +127,16 @@ function keyPressed() {
       frameCount = numFrames;
     }
   }
+  
+  // for mobile 
+  function touchStarted() {
+    if (mainMenu) {
+      mainMenu = false;
+      frameCount = 0;
+    } else
+      bird.up();
+    }
+  }
 }
 
 
