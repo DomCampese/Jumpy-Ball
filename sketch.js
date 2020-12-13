@@ -17,7 +17,7 @@ this.showMainMenu = function() {
   textSize(20);
   if (frameCount % 60 < 30) { // blinking text
     fill(51, 153, 255);
-    if (isMobileDevice()) {
+    if (!isMobileDevice()) {
       text('Press [SPACE] to play', width/2, height/2 + (height/4 - 20));
     } else {
       text('Tap to play', width/2, height/2 + (height/4 - 20));
