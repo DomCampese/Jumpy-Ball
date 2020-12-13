@@ -137,6 +137,5 @@ function keyPressed() {
     } else {
       bird.up();
     }
-    return false; 
   }
 
