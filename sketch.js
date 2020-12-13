@@ -141,7 +141,6 @@ function keyPressed() {
   }
 }
 
-  // for mobile 
   function touchStarted() {
     if (mainMenu) {
       mainMenu = false;
