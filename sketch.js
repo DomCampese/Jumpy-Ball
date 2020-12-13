@@ -5,6 +5,7 @@ var mainMenu;
 var paused;
 var highscore = 0;
 var numFrames;
+
 this.showMainMenu = function() {
   background(0);
   textAlign(CENTER);
