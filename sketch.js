@@ -24,18 +24,18 @@ this.showMainMenu = function() {
       text('Tap to play', width/2, height/2 + (height/4 - 20));
     }
   }
-}
+};
 this.showPauseMenu = function() {
   fill(255, 255, 255);
   textSize(50);
   text('PAUSED', width/2, height/2);
-}
+};
 this.displayScore = function() {
   textAlign(CENTER);
   fill(255, 255, 255);
   textSize(50);
   text(score, width/2, 50);
-}
+};
 this.isMobileDevice = function() {
   return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 };
