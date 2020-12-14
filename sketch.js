@@ -87,6 +87,9 @@ function draw() {
       setup(); 
       return;
     }
+    // check for hitting the ground
+    if (bird.y < 0) {
+      setup();
     // delete unused pipes
     if (pipes[i].offscreen()) {
       pipes.splice(i, 1);
