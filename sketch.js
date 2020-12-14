@@ -88,8 +88,9 @@ function draw() {
       return;
     }
     // check for hitting the ground
-    if (bird.y < 0) {
+    if (bird.y == height) {
       setup();
+      return;
     }
     // delete unused pipes
     if (pipes[i].offscreen()) {
