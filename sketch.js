@@ -90,6 +90,7 @@ function draw() {
     // check for hitting the ground
     if (bird.y < 0) {
       setup();
+    }
     // delete unused pipes
     if (pipes[i].offscreen()) {
       pipes.splice(i, 1);
@@ -154,6 +155,3 @@ function keyPressed() {
       bird.up();
     }
   }
-
-
-
