@@ -106,13 +106,12 @@ function keyPressed() {
 
 // detect mouse click and touch
 function mousePressed() {
-  if (mainMenu) {
+  if (!mainMenu) {
+    bird.up();
+  } else {
     mainMenu = false;
     frameCount = 0;
-  } else {
-    bird.up();
   }
-  return false; //stop any default browser behavior
 }
 
 function showMainMenu() {
