@@ -1,5 +1,3 @@
 {
-  "include": [
-    "libraries/*.js",
-, "scripts/sketch.js", "scripts/pipe.js", "scripts/bird.js", "scripts/game.js"  ]
+  "include": ["libraries/*.js", "scripts/sketch.js", "scripts/pipe.js", "scripts/bird.js", "scripts/game.js"]
 }
