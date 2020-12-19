@@ -1,4 +1,3 @@
-var fps = 60;
 var bird;
 var pipes;
 var score = 0;
@@ -11,7 +10,6 @@ var numFrames;
 // called by p5 js engine at start
 function setup() {
   var canvas;
-  frameRate(fps);
   if (isMobileDevice()) {
     canvas = createCanvas(windowWidth, windowHeight);
   } else {
@@ -33,16 +31,18 @@ function setup() {
 
 // called by p5 js engine every frame  
 function draw() {
-  frameRate(fps);
   if (mainMenu) {
     showMainMenu();
     return;
   }
+  
   if (paused) {
     showPauseMenu();
     return;
   }
+  
   background(0);
+  
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
     pipes[i].update();
@@ -69,6 +69,7 @@ function draw() {
       }
     }
   }
+  
   displayScore();
   bird.update();
   bird.show();
@@ -90,6 +91,7 @@ function keyPressed() {
       this.pause(); // space can optionally unpause the game
     }
   }
+  
   if (key == 'p') {
     if (!mainMenu) {
       this.pause();
@@ -109,7 +111,7 @@ function keyPressed() {
 }
 
 // detect mouse click and touch
-function mousePressed() {
+function touchStarted() {
   if (!mainMenu) {
     bird.up();
   } else {
