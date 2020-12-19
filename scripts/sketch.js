@@ -35,14 +35,14 @@ function draw() {
     showMainMenu();
     return;
   }
-  
+
   if (paused) {
     showPauseMenu();
     return;
   }
-  
+
   background(0);
-  
+
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
     pipes[i].update();
@@ -69,7 +69,6 @@ function draw() {
       }
     }
   }
-  
   displayScore();
   bird.update();
   bird.show();
@@ -91,12 +90,13 @@ function keyPressed() {
       this.pause(); // space can optionally unpause the game
     }
   }
-  
+
   if (key == 'p') {
     if (!mainMenu) {
       this.pause();
     }
   }
+
   // pauses or unpauses game
   this.pause = function() {
     // preserve frameCount on pause
@@ -111,7 +111,7 @@ function keyPressed() {
 }
 
 // detect mouse click and touch
-function touchStarted() {
+this.touchStarted = function() {
   if (!mainMenu) {
     bird.up();
   } else {
@@ -154,5 +154,6 @@ function displayScore() {
 }
 
 function isMobileDevice() {
-  return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+  return (typeof window.orientation !== "undefined") ||
+    (navigator.userAgent.indexOf('IEMobile') !== -1);
 }
