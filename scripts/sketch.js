@@ -1,3 +1,4 @@
+var fps = 60;
 var bird;
 var pipes;
 var score = 0;
@@ -6,9 +7,11 @@ var paused;
 var highscore = 0;
 var numFrames;
 
+
 // called by p5 js engine at start
 function setup() {
   var canvas;
+  frameRate(fps);
   if (isMobileDevice()) {
     canvas = createCanvas(windowWidth, windowHeight);
   } else {
@@ -30,6 +33,7 @@ function setup() {
 
 // called by p5 js engine every frame  
 function draw() {
+  frameRate(fps);
   if (mainMenu) {
     showMainMenu();
     return;
@@ -150,7 +154,3 @@ function displayScore() {
 function isMobileDevice() {
   return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
 }
-
-
-
-
