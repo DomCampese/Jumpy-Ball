@@ -1,13 +1,13 @@
 var bird;
 var pipes;
-var score = 0;
+var score;
 var mainMenu;
 var paused;
 var highscore = 0;
 var numFrames;
 
 
-// called by p5 js engine at start
+// called by p5.js at start
 function setup() {
   var canvas;
   if (isMobileDevice()) {
@@ -29,7 +29,7 @@ function setup() {
   score = 0;
 }
 
-// called by p5 js engine every frame  
+// called by p5.js every frame
 function draw() {
   if (mainMenu) {
     showMainMenu();
@@ -48,13 +48,7 @@ function draw() {
     pipes[i].update();
     // check for a collision
     if (pipes[i].hits(bird)) {
-      // reinitialize the game
-      setup(); 
-      return;
-    }
-    // check for hitting the ground
-    if (bird.y == height) {
-      setup();
+      setup(); // reset game
       return;
     }
     // delete unused pipes
@@ -62,22 +56,23 @@ function draw() {
       pipes.splice(i, 1);
     }
     // check for a score
-    if (pipes[i].scored(bird) && !pipes[i].hits(bird)) {
-      if (pipes[i].canScore) {
+    if (pipes[i].scored(bird)) {
         score++;
-        pipes[i].canScore = false;
-      }
     }
   }
   displayScore();
   bird.update();
   bird.show();
+
+  if (bird.hitsGround()) {
+    setup(); // reset game
+    return;
+  }
   // add a pipe every 100 frames
   if (frameCount % 100 == 0) {
     pipes.push(new Pipe());
   }
 } 
-
 
 function keyPressed() {
   if (key == ' ') {
@@ -91,10 +86,8 @@ function keyPressed() {
     }
   }
 
-  if (key == 'p') {
-    if (!mainMenu) {
+  if (key == 'p' && !mainMenu) {
       this.pause();
-    }
   }
 
   // pauses or unpauses game
@@ -110,14 +103,16 @@ function keyPressed() {
   }
 }
 
-// detect mouse click and touch
+// detect mouse click or touch
 this.touchStarted = function() {
-  if (!mainMenu) {
+  if (!mainMenu && !paused) {
     bird.up();
   } else {
     mainMenu = false;
+    paused = false;
     frameCount = 0;
   }
+  return false; 
 }
 
 function showMainMenu() {
