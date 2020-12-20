@@ -31,4 +31,7 @@ function Bird() {
         }
     }
 
+    this.hitsGround = function() {
+        return (bird.y == height);
+    }
 }
