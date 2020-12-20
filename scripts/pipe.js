@@ -1,5 +1,4 @@
 function Pipe() {
-
     this.pipeOpening = 135;
     this.center = random(50, height - this.pipeOpening-50);
     this.top = this.center - 10;
@@ -40,6 +39,11 @@ function Pipe() {
 
     // check if user scored
     this.scored = function(bird) {
-        return (bird.x >= this.x + (this.w / 2));
+        if ((bird.x >= this.x + (this.w / 2)) && this.canScore) {
+            this.canScore = false;
+            return true;
+        } else {
+            return false; 
+        }
     }
 }
