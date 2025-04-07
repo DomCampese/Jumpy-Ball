@@ -6,14 +6,13 @@ function Pipe() {
     this.x = width; // starts at far right
     this.w = 50;
     this.speed = 2;
-    this.canScore = true;
-    
+    this.canScore = true; 
 
     this.hits = function(bird) {
         // check for pipe collissions
-        if ((bird.y < this.top || bird.y > height - this.bottom)
-             && bird.x > this.x 
-             && bird.x < this.x + this.w) {
+        if ((bird.y - 16 < this.top || bird.y + 16 > height - this.bottom)
+             && bird.x + 16 > this.x 
+             && bird.x - 16 < this.x + this.w) {
             this.canScore = false;
             return true;
         }
