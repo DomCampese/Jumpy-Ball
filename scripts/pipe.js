@@ -1,23 +1,28 @@
 function Pipe() {
     this.pipeOpening = 135;
-    let groundHeight = 100;
-    let playableHeight = height - groundHeight;
+    let playableHeight = height - GROUND_HEIGHT;
     this.center = random(50, playableHeight - this.pipeOpening - 50);
     this.top = this.center - 10;
     this.bottom = playableHeight - (this.center + this.pipeOpening);
     this.x = width; // starts at far right
     this.w = 50;
     this.speed = 2;
-    this.canScore = true; 
+    this.canScore = true;
+    
+    // Pipe visual constants
+    const PIPE_CAP_HEIGHT = 25;
+    const PIPE_CAP_EXTRA_WIDTH = 5;
+    const PIPE_BODY_OFFSET = 20; 
 
     this.hits = function(bird) {
-        // Adjust collision for ground level at height - 100
-        let groundLevel = height - 100;
+        // Adjust collision for ground level
+        let groundLevel = height - GROUND_HEIGHT;
+        let birdRadius = 16; // Approximate bird collision radius
         
         // check for pipe collisions - adjusted for pipe caps
-        if ((bird.y - 16 < this.top - 25 || bird.y + 16 > groundLevel - this.bottom + 20)
-             && bird.x + 16 > this.x - 5
-             && bird.x - 16 < this.x + this.w + 5) {
+        if ((bird.y - birdRadius < this.top - PIPE_CAP_HEIGHT || bird.y + birdRadius > groundLevel - this.bottom + PIPE_BODY_OFFSET)
+             && bird.x + birdRadius > this.x - PIPE_CAP_EXTRA_WIDTH
+             && bird.x - birdRadius < this.x + this.w + PIPE_CAP_EXTRA_WIDTH) {
             this.canScore = false;
             return true;
         }
@@ -33,22 +38,22 @@ function Pipe() {
         fill(pipeGreen);
         stroke(pipeDarkGreen);
         strokeWeight(3);
-        rect(this.x, 0, this.w, this.top - 20);
+        rect(this.x, 0, this.w, this.top - PIPE_BODY_OFFSET);
         
         // Top pipe cap
         fill(pipeGreen);
         stroke(pipeDarkGreen);
-        rect(this.x - 5, this.top - 25, this.w + 10, 25);
+        rect(this.x - PIPE_CAP_EXTRA_WIDTH, this.top - PIPE_CAP_HEIGHT, this.w + PIPE_CAP_EXTRA_WIDTH * 2, PIPE_CAP_HEIGHT);
         
         // Draw bottom pipe  
         fill(pipeGreen);
         stroke(pipeDarkGreen);
-        rect(this.x, height - this.bottom + 20, this.w, this.bottom - 20);
+        rect(this.x, height - this.bottom + PIPE_BODY_OFFSET, this.w, this.bottom - PIPE_BODY_OFFSET);
         
         // Bottom pipe cap
         fill(pipeGreen);
         stroke(pipeDarkGreen);
-        rect(this.x - 5, height - this.bottom + 20, this.w + 10, 25);
+        rect(this.x - PIPE_CAP_EXTRA_WIDTH, height - this.bottom + PIPE_BODY_OFFSET, this.w + PIPE_CAP_EXTRA_WIDTH * 2, PIPE_CAP_HEIGHT);
         
         noStroke();
     }

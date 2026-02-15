@@ -6,6 +6,19 @@ var paused;
 var highscore = 0;
 var numFrames;
 
+// Constants for visual design
+const GROUND_HEIGHT = 100;
+
+// Helper function to draw gradient background
+function drawGradientBackground() {
+  for (let i = 0; i < height; i++) {
+    let inter = map(i, 0, height, 0, 1);
+    let c = lerpColor(color(135, 206, 250), color(30, 144, 255), inter);
+    stroke(c);
+    line(0, i, width, i);
+  }
+  noStroke();
+}
 
 // called by p5.js at start
 function setup() {
@@ -42,13 +55,7 @@ function draw() {
   }
 
   // Sky blue gradient background (classic Flappy Bird style)
-  for (let i = 0; i < height; i++) {
-    let inter = map(i, 0, height, 0, 1);
-    let c = lerpColor(color(135, 206, 250), color(30, 144, 255), inter);
-    stroke(c);
-    line(0, i, width, i);
-  }
-  noStroke();
+  drawGradientBackground();
 
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
@@ -71,9 +78,9 @@ function draw() {
   
   // Draw ground at the bottom (classic Flappy Bird style)
   fill(222, 216, 149); // tan/sand color
-  rect(0, height - 100, width, 100);
+  rect(0, height - GROUND_HEIGHT, width, GROUND_HEIGHT);
   fill(193, 154, 107); // darker brown for accent
-  rect(0, height - 100, width, 10);
+  rect(0, height - GROUND_HEIGHT, width, 10);
   
   bird.update();
   bird.show();
@@ -131,13 +138,7 @@ this.touchStarted = function() {
 
 function showMainMenu() {
   // Sky blue gradient background
-  for (let i = 0; i < height; i++) {
-    let inter = map(i, 0, height, 0, 1);
-    let c = lerpColor(color(135, 206, 250), color(30, 144, 255), inter);
-    stroke(c);
-    line(0, i, width, i);
-  }
-  noStroke();
+  drawGradientBackground();
   
   textAlign(CENTER);
   fill(255, 220, 0); // Yellow like the bird

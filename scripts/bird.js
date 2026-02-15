@@ -47,9 +47,9 @@ function Bird() {
         this.y += this.velocity;
         this.velocity *= 0.9;
 
-        // Ground is now at height - 100
-        if (this.y > height - 100 - this.size/2) {
-            this.y = height - 100 - this.size/2;
+        // Ground is now at height - GROUND_HEIGHT
+        if (this.y > height - GROUND_HEIGHT - this.size/2) {
+            this.y = height - GROUND_HEIGHT - this.size/2;
             this.velocity = 0;
         }
 
@@ -60,6 +60,6 @@ function Bird() {
     }
 
     this.hitsGround = function() {
-        return (bird.y >= height - 100 - this.size/2);
+        return (bird.y >= height - GROUND_HEIGHT - this.size/2);
     }
 }
