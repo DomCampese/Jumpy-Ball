@@ -41,7 +41,14 @@ function draw() {
     return;
   }
 
-  background(0);
+  // Sky blue gradient background (classic Flappy Bird style)
+  for (let i = 0; i < height; i++) {
+    let inter = map(i, 0, height, 0, 1);
+    let c = lerpColor(color(135, 206, 250), color(30, 144, 255), inter);
+    stroke(c);
+    line(0, i, width, i);
+  }
+  noStroke();
 
   for (var i = pipes.length-1; i >= 0; i--) {
     pipes[i].show();
@@ -61,6 +68,13 @@ function draw() {
     }
   }
   displayScore();
+  
+  // Draw ground at the bottom (classic Flappy Bird style)
+  fill(222, 216, 149); // tan/sand color
+  rect(0, height - 100, width, 100);
+  fill(193, 154, 107); // darker brown for accent
+  rect(0, height - 100, width, 10);
+  
   bird.update();
   bird.show();
 
@@ -116,17 +130,28 @@ this.touchStarted = function() {
 }
 
 function showMainMenu() {
-  background(0);
+  // Sky blue gradient background
+  for (let i = 0; i < height; i++) {
+    let inter = map(i, 0, height, 0, 1);
+    let c = lerpColor(color(135, 206, 250), color(30, 144, 255), inter);
+    stroke(c);
+    line(0, i, width, i);
+  }
+  noStroke();
+  
   textAlign(CENTER);
-  fill(51, 153, 255);
+  fill(255, 220, 0); // Yellow like the bird
   textSize(30);
   text('HIGH SCORE: ' + highscore, width/2, height/4);
   textSize(50);
-  fill(144,238,144);
-  text('JUMPY BALL', width/2, height/2);
+  fill(255, 255, 255); // White text
+  stroke(0);
+  strokeWeight(3);
+  text('JUMPY BIRD', width/2, height/2);
+  noStroke();
   textSize(20);
   if (frameCount % 60 < 30) { // blinking text
-    fill(51, 153, 255);
+    fill(255, 220, 0); // Yellow
     if (!isMobileDevice()) {
       text('Press [SPACE] to play', width/2, height/2 + (height/4 - 20));
     } else {
